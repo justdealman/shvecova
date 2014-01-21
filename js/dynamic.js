@@ -7,12 +7,19 @@
 		scrollabe: false,
 		play: 7500
 	});
-	if ( $('.menu .nav li').children('ul').length > 0 ) {
-		$('.menu .nav li a').click(function() {
-			$(this).parent('li').children('ul').slideDown(0);
-			return false;
-		});
-	}
+	document.ontouchmove = function(e) {
+		e.preventDefault();
+	};
+	$('.slider').hammer().on('swipeleft', function() {
+		$(this).superslides('animate', 'next');
+	});
+	$('.slider').hammer().on('swiperight', function() {
+		$(this).superslides('animate', 'prev');
+	});
+	$('.menu .nav li.sub > a').click(function() {
+		$(this).parent('li').children('ul').slideDown(0);
+		return false;
+	});
 	$('.menu .nav li ul li.back a').click(function() {
 		$(this).parent('li').parent('ul').slideUp(0);
 		return false;
